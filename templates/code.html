@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+          name="viewport">
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <title>Spring Boot - Thymeleaf</title>
+    <link th:href="@{/main.css}" rel="stylesheet"/>
+</head>
+<body class="flex items-center justify-center h-screen">
+<div class="rounded-lg border shadow-lg p-10 w-3/5">
+    <div class="flex flex-row justify-between pb-4">
+        <div>
+            <h2 class="text-xl font-bold">Bordereau de location#<span class="text-green-600" th:text="${id}"></span>
+            </h2>
+        </div>
+        <div>
+            <div class="text-xl font-bold" th:text="${#dates.format(orderEntry.dateLocation, 'dd-MMM-yyyy')}"></div>
+        </div>
+    </div>
+    <div class="flex flex-col pb-8">
+        <div class="pb-2">
+            <h2 class="text-xl font-bold">Locataire</h2>
+        </div>
+        <div th:text="${orderEntry.utilisateur.nom}"></div>
+        <div th:text="${orderEntry.utilisateur.prenom}"></div>
+        <div th:text="${orderEntry.utilisateur.username}"></div>
+        <div th:text="${orderEntry.utilisateur.telephone}"></div>
+
+    </div>
+    <table class="table-fixed w-full text-right border rounded">
+        <thead class="bg-gray-100">
+        <tr>
+            <th class="text-left pl-4">Bien</th>
+            <th>Montant</th>
+            <th>Date début</th>
+            <th>Date fin</th>
+            
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+        	<td class="pl-4 text-left" th:text="${orderEntry.bien.libelle}"></td>
+            <td th:text="${orderEntry.bien.prix}"></td>
+            <td th:text="${#dates.format(orderEntry.dateDebut, 'dd-MM-yyyy')}"></td>
+            <td th:text="${#dates.format(orderEntry.dateFin, 'dd-MM-yyyy')}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="flex flex-row-reverse p-5">
+        <h2 class="font-medium  bg-gray-200 p-2 rounded">
+            Grand Total: <span class="text-green-600" th:text="${orderEntry.bien.prix}"></span>
+        </h2>
+    </div>
+    
+</div>
+</body>
